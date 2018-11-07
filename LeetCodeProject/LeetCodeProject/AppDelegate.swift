@@ -70,6 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     [15,14,12,16]]
         
         LeetCode48.rotate(&temp)
+        
+        LeetCode22.generateParenthesis(3)
         return true
     }
 

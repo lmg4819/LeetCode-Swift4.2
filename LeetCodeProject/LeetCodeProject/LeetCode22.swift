@@ -26,37 +26,55 @@ import UIKit
  
  */
 class LeetCode22: NSObject {
-    func generateParenthesis(_ n: Int) -> [String] {
+   class func generateParenthesis(_ n: Int) -> [String] {
         var res:[String] = [String].init()
         var path:String = String.init()
-        backTrace(n, &res, &path, 0)
+        backTrace(left: n, right: n, res: &res, path: &path)
         return res
     }
-    
-    func backTrace(_ n:Int,_ res: inout [String], _ path:inout String, _ index:Int){
-        
-        
-        for i in 0..<n {
-            if i == 0{
+    ///*left、right分别是左右括号剩下的括号数*/
+  class  func backTrace(left:Int,right:Int,res:inout [String],path: inout String) {
+        if left > right {
+            return
+        }
+        if left == 0 && right == 0{
+            res.append(path)
+            return
+        }else
+        {
+            if left > 0{
                 path.append("(")
+                backTrace(left: left-1, right: right, res: &res, path: &path)
             }
-            
-            if i == n-1 {
+            if right > 0{
                 path.append(")")
-            }
-            
-            for j in 0..<2{
-                if j == 0 {
-                    path.append("(")
-                }else{
-                    path.append(")")
-                }
+                backTrace(left: left, right: right-1, res: &res, path: &path)
             }
         }
-
     }
+    
 }
 /*
  
+ vector<string> generateParenthesis(int n)
+      {
+          vector<string> res;
+          generateDFS(n,n,"",res);
+          return res;
+      }
  
+      /*left、right分别是左右括号剩下的括号数*/
+      void generateDFS(int left,int right,string temp,vector<string> &res)
+      {
+         if(left>right) return;
+        if(left==0&&right==0)
+             res.push_back(temp);
+        else
+         {
+           if(left>0)
+                  generateDFS(left-1,right,temp+'(',res);
+            if(right>0)
+                 generateDFS(left,right-1,temp+')',res);
+         }
+     }
  */
