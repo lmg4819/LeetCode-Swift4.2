@@ -15,63 +15,57 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-/*
-     给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。
-     
-     注意：答案中不可以包含重复的三元组。
-     
-     例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，
-     
-     满足要求的三元组集合为：
-     [
-     [-1, 0, 1],
-     [-1, -1, 2]
-     ]
-     */
-
-    
-    
     /*
-     
+     1 1 2 3 5 8 13
      
      */
-    
-    
-//    func permute(_ nums:[Int]) -> [[Int]] {
-//        var res = [[Int]].init()
-//        var path = [Int].init()
-//        var isVisited = [Bool].init(repeating: false, count: nums.count)
-//        dfs(&res, &path, &isVisited, nums)
-//
-//        return res
-//    }
-//
-//    func dfs(_ res: inout [[Int]],_ path: inout [Int], _ isVisited:inout [Bool], _ nums:[Int]) {
-//        guard path.count != nums.count else{
-//            res.append(path)
-//            return
-//        }
-//        for (i,num) in nums.enumerated() where !isVisited[i] {
-//            path.append(num)
-//            isVisited[i] = true
-//            dfs(&res, &path, &isVisited, nums)
-//            isVisited[i] = false
-//            path.removeLast()
-//        }
-//
-//    }
-   
+    func Fibonacci( number:Int) -> Int {
+        
+        
+        if number == 0 {
+            return 1
+        }
+        if number == 1 {
+            return 1
+        }
+        
+        return Fibonacci(number: number-1) + Fibonacci(number: number-2)
+        
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        var temp = [[ 5, 1, 9,11],
-                    [ 2, 4, 8,10],
-                    [13, 3, 6, 7],
-                    [15,14,12,16]]
         
-        LeetCode48.rotate(&temp)
         
-        LeetCode22.generateParenthesis(3)
+        LeetCode8.myAtoi(str: "42")
+        
+        //反向遍历
+//        for j in stride(from: temp.count-1, to: -1, by:-1) {
+//            print(j)
+//        }
+//
+//        for i in (0..<temp.count).reversed() {
+//            print(i)
+//        }
+//
+//        for (index,value) in temp.enumerated().reversed() {
+//            print(index,value)
+//        }
+    
+
+        //正向遍历
+//        for i in stride(from: 0, to: temp.count, by: 1){
+//            print(i)
+//        }
+//
+//        for j in 0..<temp.count {
+//            print(j)
+//        }
+//
+//        for (index,value) in temp.enumerated() {
+//            print(index,value)
+//        }
+        
         return true
     }
 

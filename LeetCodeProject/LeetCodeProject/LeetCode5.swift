@@ -1,0 +1,31 @@
+//
+//  LeetCode5.swift
+//  LeetCodeProject
+//
+//  Created by lmg on 2018/11/9.
+//  Copyright © 2018 lmg. All rights reserved.
+//
+
+import UIKit
+/*
+ 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为1000。
+ 
+ 示例 1：
+ 
+ 输入: "babad"
+ 输出: "bab"
+ 注意: "aba"也是一个有效答案。
+ 示例 2：
+ 
+ 输入: "cbbd"
+ 输出: "bb"
+ 
+ abcd dcba
+ 
+ 
+ */
+class LeetCode5: NSObject {
+    
+    
+
+}

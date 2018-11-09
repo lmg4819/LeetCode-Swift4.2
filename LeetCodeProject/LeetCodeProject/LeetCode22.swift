@@ -26,14 +26,15 @@ import UIKit
  
  */
 class LeetCode22: NSObject {
-   class func generateParenthesis(_ n: Int) -> [String] {
+  class  func generateParenthesis(_ n: Int) -> [String] {
         var res:[String] = [String].init()
-        var path:String = String.init()
-        backTrace(left: n, right: n, res: &res, path: &path)
+    
+        backTrace(left: n, right: n, res: &res, path: "")
         return res
     }
     ///*left、right分别是左右括号剩下的括号数*/
-  class  func backTrace(left:Int,right:Int,res:inout [String],path: inout String) {
+  class  func backTrace(left:Int,right:Int,res:inout [String],path:String) {
+    
         if left > right {
             return
         }
@@ -43,17 +44,26 @@ class LeetCode22: NSObject {
         }else
         {
             if left > 0{
-                path.append("(")
-                backTrace(left: left-1, right: right, res: &res, path: &path)
+                backTrace(left: left-1, right: right, res: &res, path:path+"(")
             }
             if right > 0{
-                path.append(")")
-                backTrace(left: left, right: right-1, res: &res, path: &path)
+                backTrace(left: left, right: right-1, res: &res, path: path+")")
             }
         }
     }
     
 }
+
+/*
+ 3  3
+ 0  0
+ 0  1
+ 0  2
+ 0  3
+ 
+ 
+ 
+ */
 /*
  
  vector<string> generateParenthesis(int n)

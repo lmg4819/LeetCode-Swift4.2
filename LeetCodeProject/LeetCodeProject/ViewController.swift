@@ -56,6 +56,7 @@ class ViewController: UIViewController {
 //        threeSumClosest([-3,-2,-5,3,-4], -1)
     trap([0,1,0,2,1,0,1,3,2,1,2,1])
         combinationSum([2,3,5], 8)
+    
     }
 
     
