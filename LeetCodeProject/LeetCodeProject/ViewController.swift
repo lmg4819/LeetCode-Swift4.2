@@ -17,48 +17,169 @@ public class ListNode{
     }
 }
 /*
- 给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+ 常见的时间复杂度有：
+ 常数阶：O(1)
+ 对数阶：O(log2n)
+ 线性阶：O(n)
+ 线性对数阶：O(nlog2n)
+ 平方阶：O(n^2)
+ 立方阶：O(n^3)
+ K次方阶：O(n^K)
+ 指数阶：O(2^n)
+所有的排序方法：
+1.插入排序   O(n^2) 稳定
+2.选择排序   O(n^2) 不稳定
+3.冒泡排序   O(n^2) 稳定
+4.快速排序   O(nlogn) 平均时间, O(n2) 最坏情况; 对于大的、乱序串列一般认为是最快的已知排序 不稳定
+5.堆排序     O(nlogn) 不稳定
+6.归并排序   O(n log n); 需要 O(n) 额外存储空间 稳定
+7.希尔排序   O(nlogn) 不稳定
+8.二叉树排序 O(nlogn); 需要 O(n) 额外存储空间 稳定
+9.桶排序    O(n); 需要 O(k) 额外存储空间 稳定
+10.计数排序  O(n+k); 需要 O(n+k) 额外存储空间，k为序列中Max-Min+1 稳定
+11.基数排序  O(n·k); 需要 O(n) 额外存储空间 （K为特征个数）不稳定
  
- candidates 中的数字可以无限制重复被选取。
  
- 说明：
+ 分治法的基本思想是：将原问题分解为若干个规模更小但结构与原问题相似的子问题，递归的解这些子问题，然后将这些子问题的解组合为原问题的解
  
- 所有数字（包括 target）都是正整数。
- 解集不能包含重复的组合。
- 
- 输入: candidates = [2,3,6,7], target = 7,
- 所求解集为:
- [
- [7],
- [2,2,3]
- ]
- 
- 输入: candidates = [2,3,5], target = 8,
- 所求解集为:
- [
- [2,2,2,2],
- [2,3,3],
- [3,5]
- ]
  */
+//选择排序  O(n^2) 不稳定
+func selectSort(_ nums:inout [Int]) -> [Int] {
+    for i in 0..<nums.count-1 {
+        for j in i+1..<nums.count {
+            if nums[j] < nums[i]{
+                (nums[i],nums[j]) = (nums[j],nums[i])
+            }
+        }
+    }
+    return nums
+}
+
+//插入排序 O(n^2) 稳定
+func insertSort(_ nums:inout [Int]) ->[Int] {
+    for i in 1..<nums.count {
+        for j in (1...i).reversed() {
+            if nums[j] < nums[j-1]{
+                (nums[j-1],nums[j]) = (nums[j],nums[j-1])
+            }
+        }
+    }
+    return nums
+}
+
+//冒泡排序 O(n^2) 稳定
+func bubbleSort(_ nums:inout [Int]) -> [Int] {
+    for i in 0..<nums.count {
+        for j in 0..<nums.count-i-1{
+            if nums[j] > nums[j+1]{
+                (nums[j],nums[j+1]) = (nums[j+1],nums[j])
+            }
+        }
+    }
+    return nums
+}
+
+/*2 1 5 9 0 6 8 7 3
+ 0 1 5 9 0 6 8 7 3
+ 0 1 5 9 5 6 8 7 3
+ 0 1 9 9 5 6 8 7 3
+ {0 1 2} {9 5 6 8 7 3}
+ */
+//快速排序 O(nlogn) 平均时间, O(n2) 最坏情况; 对于大的、乱序串列一般认为是最快的已知排序 不稳定
+func fastSort(_ nums:inout [Int]) -> [Int] {
+    sort(&nums, left: 0, right: nums.count-1)
+    return nums
+}
+
+func sort(_ nums:inout [Int],left:Int,right:Int) {
+    if left >= right {
+        return
+    }
+    var i = left,j=right,key = nums[left]
+    while i<j {
+        while i<j && key<=nums[j]{
+            j -= 1
+        }
+        nums[i] = nums[j]
+        
+        while i<j && key>=nums[i]{
+            i += 1
+        }
+        nums[j] = nums[i]
+    }
+    nums[i] = key
+    sort(&nums, left: left, right: i-1)
+    sort(&nums, left: i+1, right:right)
+}
+
+//堆排序 O(nlogn) 不稳定
+/*
+ [4,6,8,5,9]
+ 4
+ 6 8
+ 5 9
+ 
+ 
+ 
+ 
+ 
+ */
+
+//希尔排序 O(nlogn) 不稳定
+func shellSort(_ nums:inout [Int])->[Int]{
+    
+    var gap = nums.count
+    while gap > 0 {
+        for i in gap..<nums.count {
+            var j = i
+            while j-gap >= 0 && nums[j] < nums[j-gap]{
+                (nums[j-gap],nums[j]) = (nums[j],nums[j-gap])
+                j -= gap
+            }
+        }
+        gap = gap/2
+    }
+    return nums
+}
+//归并排序 O(n log n); 需要 O(n) 额外存储空间 稳定
+
+
 
 class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //        countAndSay(9)
-        //        strStr("a", "a")
-        //        reverse(-123)
-        //    var result = isPalindrome(10)
-        //    let resultArray = fourSum([-5, 5, 4, -3, 0, 0, 4,-2], 4)
-        //        print(resultArray)
-//        threeSumClosest([-3,-2,-5,3,-4], -1)
-    trap([0,1,0,2,1,0,1,3,2,1,2,1])
-        combinationSum([2,3,5], 8)
-    
+        var temp = [49,38,65,97,76,13,27,49,55,4]
+//        mergeSort(&temp)
+//        shellSort(&temp)
+//        heapSort(&temp)
+//        fastSort(&temp)
+//        bubbleSort(&temp)
+//        insertSort(&temp)
+//        selectSort(&temp)
     }
-
+    
+   
+    
+    
+    func BinarySearch(_ nums:[Int],target:Int) -> Int {
+        guard nums.count > 0 else {
+            return 0
+        }
+        var left = 0 ,right = nums.count - 1
+        while left<right {
+            let mid = (left + right)/2
+            if nums[mid] > target {
+                left = mid
+            }else if nums[mid] < target {
+                right = mid
+            }else {
+                return mid
+            }
+            
+        }
+        return 0
+    }
     
     func combinationSum2(_ candidates: [Int], _ target: Int) -> [[Int]] {
         var res = [[Int]].init()

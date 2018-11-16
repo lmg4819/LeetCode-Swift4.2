@@ -32,7 +32,7 @@ class LeetCode29: NSObject {
         
         let isNegative = (dividend < 0) != (divisor < 0)
         var dividend = abs(dividend)
-        var divisor = abs(divisor)
+        let divisor = abs(divisor)
         var count = 0
         
         while dividend >= divisor {

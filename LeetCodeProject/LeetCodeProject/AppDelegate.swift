@@ -33,11 +33,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
 
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         
-        LeetCode8.myAtoi(str: "42")
+        let tempString = "hello world"
+        let subStartStr = tempString.js_subStringFrom(from: 3)
+        let subEndStr = tempString.js_subStringTo(to: -3)
+        let rangeStr = tempString.js_subStringWithRange(from: 2, to: 4)
+        
+        
+        
+        
+        
+        let returnValue =  LeetCode70.climbStairs(44)
+//        LeetCode64.minPathSum([
+//            [1,3,1],
+//            [1,5,1],
+//            [4,2,1]
+//            ])
+//        LeetCode79.exist([["A","B","C","E"],
+//                          ["S","F","C","S"],
+//                          ["A","D","E","E"]], "ABCCED")
+//        LeetCode58.lengthOfLastWord(" ")
+//        LeetCode3.lengthOfLongestSubstring("pwwkew")
+//        LeetCode11.maxArea([1,8,6,2,5,4,8,3,7])
+//        LeetCode45.jump([2,3,1,1,4])
+//        LeetCode8.myAtoi(str: "42")
+        LeetCode34.searchRange([1], 1)
         
         //反向遍历
 //        for j in stride(from: temp.count-1, to: -1, by:-1) {
@@ -94,3 +118,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension String {
+    public func js_subStringFrom(from index:Int)->String {
+        if self.count > index {
+            let startIndex = self.index(self.startIndex, offsetBy: index)
+            let subString = self[startIndex...]
+            return String(subString)
+        }
+        return self
+    }
+    
+   public func js_subStringTo(to index:Int) -> String {
+        if self.count > index {
+            let endIndex = self.index(self.endIndex, offsetBy: index)
+            let subString = self[..<endIndex]
+            return String(subString)
+        }
+        return self
+    }
+    
+  public  func js_subStringWithRange(from:Int,to:Int) -> String {
+        if self.count > from && self.count > to && to > from{
+            let startIndex = self.index(self.startIndex, offsetBy: from)
+            let endIndex = self.index(self.startIndex, offsetBy: to)
+            let rangeStr = self[startIndex...endIndex]
+            return String(rangeStr)
+        }
+        return self
+    }
+
+    
+    
+}
